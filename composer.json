@@ -1,5 +1,5 @@
 {
-    "name": "Valkhan/EasyMask",
+    "name": "valkhan/easymask",
     "type": "library",
     "description": "A unique file for most commom masks.",
     "keywords": ["php", "mask", "easy"],
