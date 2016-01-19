@@ -5,7 +5,7 @@ Easy PHP mask class for: Phone Numbers, Dates, Documents and more...
 
 The file is self-explanatory, some examples below:
 ```
-include [pathtoclass];
+//include [pathtoclass]; //-- Only necessary if used without composer's autoload
 $EasyMask = new Valkhan\EasyTools\EasyMask();
 $EasyMask->date("2016-01-18","m/Y","Y-m-d"); // returns "01/2016"
 $EasyMask->number("1234.56",2,",",""); // returns "R$ 1234,56"
