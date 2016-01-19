@@ -17,7 +17,7 @@
     },
     "autoload": {
         "psr-4": {
-            "EasyMask\\": "EasyMask/"
+            "Valkhan\\EasyTools\\": "./libs/"
         }
     }
 }
