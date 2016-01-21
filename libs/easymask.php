@@ -99,15 +99,46 @@ class EasyMask {
     }
 
     /**
-     * CPF (11 chars) or CNPJ (14 chars)
+     * Masks a given string for a given document type as:
+     * CNPJ: 99.999.999/9999-99
+     * CPJ/CNH: 999.999.999-99
+     * RG: 99.999.999-A Note: valid digits for A: '0-9' and 'X' or 'Y'
+     * IE/IM: 999.999.999.999
      * @param type $doc
      */
-    public function cpf_cnpj($doc) {
-        $doc = $this->sanitize($doc, 'number');
-        if (strlen($doc) == 11) {
-            return substr($doc, 0, 3) . '.' . substr($doc, 3, 3) . '.' . substr($doc, 6, 3) . '-' . substr($doc, -2);
+    public function document($document, $type = 'cpf') {
+        switch (strtolower($type)) {
+            case 'cnpj':
+                $document = $this->fill($this->sanitize($document, 'number'), '0', 14, 'L');
+                return preg_replace('/^(\d{2})(\d{3}){1}(\d{3}){1}(\d{4}){1}(\d{2})$/', '${1}.${2}.${3}/${4}-${5}', $document);
+                break;
+            case 'cnh';
+            case 'cpf':
+                $document = $this->fill($this->sanitize($document, 'number'), '0', 11, 'L');
+                return preg_replace('/^(\d{1,3})(\d{3}){1}(\d{3}){1}(\d{2})$/', '${1}.${2}.${3}-${4}', $document);
+                break;
+            case 'rg':
+                $document = trim(strtoupper($document));
+                $lastDigit = substr($document, -1);
+                $lastDigit = !in_array($lastDigit, array('X', 'Y')) ? intval($lastDigit) : $lastDigit;
+                $document = $this->sanitize(substr($document, 0, -1), 'number') . $lastDigit;
+                $document = $this->fill($document, '0', 9, 'L');
+                return preg_replace('/^(\d{2})(\d{3})(\d{3})(\w{1})$/', '${1}.${2}.${3}-${4}', $document);
+                break;
+            case 'ie':
+            case 'im':
+                $document = $this->fill($this->sanitize($document, 'number'), '0', 12, 'L');
+                return preg_replace('/^(\d{3})(\d{3})(\d{3})(\d{3})$/', '${1}.${2}.${3}.${4}', $document);
+                break;
+            case 'cep':
+            case 'zipcode':
+                $document = $this->fill($this->sanitize($document, 'number'), '0', 8, 'R');
+                return preg_replace('/^(\d{5})(\d{3})$/', '${1}-${2}', $document);
+                break;
+            default:
+                return $document;
+                break;
         }
-        return substr($doc, 0, 2) . '.' . substr($doc, 2, 3) . '.' . substr($doc, 5, 3) . '/' . substr($doc, 8, 4) . '-' . substr($doc, -2);
     }
 
     /**
@@ -188,6 +219,7 @@ class EasyMask {
                 break;
             default:
                 return $value;
+                break;
         }
     }
 
