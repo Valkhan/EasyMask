@@ -18,13 +18,18 @@ $EasyMask->phone("4433111112222"); // returns "+044(033)11111-2222"
 ```
 
 ##Future Plans:
-* Add support for more Brazilian Documents: RG (Registro Geral), IE (Inscrição Estadual) and IM (Inscrição Municipal).
-* Add a function to centralize documents masks. 
+* Add more masks :)
 
 ##Changelog:
 
+v1.1.0
+* Added support for most commom brazilian documents
+* All documents where put in a single function
+* Changed from substr to preg_replace
+* Added test file
+
 v1.0.1:
-* Add composer.json and composer compatibility
+* Added composer.json and composer compatibility
 
 v1.0.0:
 * Added support for phone numbers: (8-9) digits phone + (2-3) digits area code + country code
