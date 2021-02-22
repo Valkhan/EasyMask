@@ -135,6 +135,10 @@ class EasyMask {
                 $document = $this->fill($this->sanitize($document, 'number'), '0', 8, 'R');
                 return preg_replace('/^(\d{5})(\d{3})$/', '${1}-${2}', $document);
                 break;
+            case 'electoralcard':
+                $document = $this->fill($this->sanitize($document, 'number'), '0', 12, 'R');
+                return preg_replace('/^(\d{4})(\d{4})(\d{2})(\d{2})$/', '${1}.${2}.${3}.${4}', $document);
+                break;
             default:
                 return $document;
                 break;
