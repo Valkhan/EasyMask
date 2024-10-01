@@ -1,7 +1,7 @@
 # EasyMask
 Easy PHP mask class for: Phone Numbers, Dates, Documents and more...
 
-##Usage:
+## Usage:
 
 The file is self-explanatory, some examples below:
 ```
@@ -17,21 +17,21 @@ $EasyMask->phone("33111112222"); // returns "(033)11111-2222"
 $EasyMask->phone("4433111112222"); // returns "+044(033)11111-2222"
 ```
 
-##Future Plans:
+## Future Plans:
 * Add more masks :)
 
-##Changelog:
+## Changelog:
 
-v1.1.0
+### v1.1.0
 * Added support for most commom brazilian documents
 * All documents where put in a single function
 * Changed from substr to preg_replace
 * Added test file
 
-v1.0.1:
+### v1.0.1:
 * Added composer.json and composer compatibility
 
-v1.0.0:
+### v1.0.0:
 * Added support for phone numbers: (8-9) digits phone + (2-3) digits area code + country code
 * Added support for dates.
 * Added support for Zip Codes.
